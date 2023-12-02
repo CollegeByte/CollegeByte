@@ -10,11 +10,11 @@ const body = document.querySelector("body"),
   ebookbox = document.querySelector(".ebook-box"),
   ebookbtn = document.querySelector(".get-ebook"),
   ebookBody = document.querySelector(".ebook-body"),
-  downArrow = document.querySelector(".down-arrow"),
+  downArrow = document.querySelectorAll(".ebook"),
   main = document.querySelector(".main"),
   loader = document.querySelector(".loader-animation"),
   notesBtn = document.querySelector(".get-notes");
-  
+
 
 let getMode = localStorage.getItem("mode");
 if (getMode && getMode === "dark-mode") {
@@ -65,19 +65,21 @@ pyqbtn.addEventListener("click", () => {
 });
 
 //dropdown arrow rotate and display ebook body 
-downArrow.addEventListener("click", e => {
-  let clickedElm = e.target;
-
-  if (!clickedElm.classList.contains("fa-rotate-180")) {
-    ebookBody.style.display = "block";
-    downArrow.classList.add("fa-rotate-180");
-  }
-
-  else {
-    ebookBody.style.display = "none";
-    downArrow.classList.remove("fa-rotate-180");
-  }
-});
+downArrow.forEach(ele =>{
+  ele.addEventListener("click", e => {
+    let clickedElm = ele.children[0].children[1] ;
+    let eBookBody = ele.children[1];
+    if (!clickedElm.classList.contains("fa-rotate-180")) {
+      eBookBody.style.display = "block";
+      clickedElm.classList.add("fa-rotate-180");
+    }
+  
+    else {
+      eBookBody.style.display = "none";
+      clickedElm.classList.remove("fa-rotate-180");
+    }
+  });
+})
 
 //loader animation 
 function loaderAnimation() {
